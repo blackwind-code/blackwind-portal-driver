@@ -42,7 +42,7 @@ func UserCreate(email string, passwordHash string) HttpRes {
 
 	// openstack user create --project <email> --password <randompass> <email>
 	// output, err = exec.Command("openstack user create --project " + argEmail + " --password " + argRandomPass + " " + argEmail).Output()
-	output, err = exec.Command("openstack", "user", "create", "--domain", "default", "--project", argEmail, "--project-domain", "default", "--password", argRandomPass, "--user", argEmail).Output()
+	output, err = exec.Command("openstack", "user", "create", "--domain", "default", "--project", argEmail, "--project-domain", "default", "--password", argRandomPass, argEmail).Output()
 	if err != nil {
 		Log.Printf("Error: %v\n", err)
 		return HttpRes{status: "500 Internal Server Error", body: string(output)}
