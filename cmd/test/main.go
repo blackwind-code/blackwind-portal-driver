@@ -8,6 +8,8 @@ import (
 	"github.com/blackwind-code/blackwind-portal-driver/internal/zerotier"
 )
 
+// Usage: ./main <ZT_ADDR_HERE>
+// ZT_ADDR must be 10 digits hex number
 func main() {
 	ZT_ADDR := os.Args[1]
 

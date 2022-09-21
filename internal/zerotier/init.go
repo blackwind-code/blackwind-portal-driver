@@ -13,6 +13,8 @@ var ZEROTIER_NETWORK_ID string
 
 var Log *log.Logger
 
+var PROHIBITED []string
+
 func Init(m *http.ServeMux) {
 	Log = log.New(os.Stdout, "[zerotier]", log.Ldate|log.Ltime|log.Llongfile)
 
@@ -20,4 +22,6 @@ func Init(m *http.ServeMux) {
 	ZEROTIER_TOKEN = os.Getenv("ZEROTIER_TOKEN")
 	ZEROTIER_NODE_ID = os.Getenv("ZEROTIER_NODE_ID")
 	ZEROTIER_NETWORK_ID = os.Getenv("ZEROTIER_NETWORK_ID")
+
+	PROHIBITED = []string{"04055d4bbe"}
 }
