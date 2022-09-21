@@ -21,6 +21,8 @@ CREATE USER '<OS_DB_USERNAME>'@'%' IDENTIFIED BY '<OS_DB_PASSWORD>';
 
 GRANT SELECT ON keystone.local_user TO '<OS_DB_USERNAME>'@'localhost';
 GRANT SELECT ON keystone.local_user TO '<OS_DB_USERNAME>'@'%';
+GRANT UPDATE ON keystone.local_user TO '<OS_DB_USERNAME>'@'localhost';
+GRANT UPDATE ON keystone.local_user TO '<OS_DB_USERNAME>'@'%';
 GRANT UPDATE ON keystone.password TO '<OS_DB_USERNAME>'@'localhost';
 GRANT UPDATE ON keystone.password TO '<OS_DB_USERNAME>'@'%';
 
