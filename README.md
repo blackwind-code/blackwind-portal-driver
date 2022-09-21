@@ -13,6 +13,7 @@ go build main.go
 ## Add database user & grant privilege to user on Openstack database (Once)
 - Requires fully operational openstack cluster
 - Requires fully operational zerotier controller node
+- ^ Openstack and Zerotier API endpoints must be reachable to this driver
 ```bash
 mysql -u root -p
 
