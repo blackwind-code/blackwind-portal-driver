@@ -16,7 +16,7 @@ func main() {
 	log.Printf("Zerotier Address: %v\n", ZT_ADDR)
 
 	m := http.NewServeMux()
-	zerotier.Init(m)
+	zerotier.Init(m, "asdsad")
 
 	log.Printf("[Test 0] Creating device: %v\n", ZT_ADDR)
 	log.Printf("[Output 0] %v\n\n\n", zerotier.DeviceCreate(ZT_ADDR))

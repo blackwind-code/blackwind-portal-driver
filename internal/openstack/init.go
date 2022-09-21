@@ -9,6 +9,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+var SECRET string
+
 var OS_USERNAME string
 var OS_PASSWORD string
 var OS_PROJECT_NAME string
@@ -28,8 +30,20 @@ var OS_DB *sql.DB
 var PROHIBITED []string
 var stmtUpdateUserPasswordHash *sql.Stmt
 
-func Init(m *http.ServeMux) {
+func checkSecretMiddleware(next http.HandlerFunc) http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Header.Get("X-Auth-Token") == SECRET {
+			next(w, r)
+		} else {
+			http.Error(w, "Forbidden", http.StatusForbidden)
+		}
+	})
+}
+
+func Init(m *http.ServeMux, secret string) {
 	Log = log.New(os.Stdout, "[openstack]", log.Ldate|log.Ltime|log.Llongfile)
+
+	SECRET = secret
 
 	OS_USERNAME = os.Getenv("OS_USERNAME")
 	OS_PASSWORD = os.Getenv("OS_PASSWORD")
@@ -58,7 +72,7 @@ func Init(m *http.ServeMux) {
 
 	PROHIBITED = []string{"admin", "glance", "placement", "neutron", "nova", "cinder"}
 
-	m.HandleFunc("/api/openstack/user", apiOpenstackHandler)
+	m.HandleFunc("/api/openstack/user", checkSecretMiddleware(apiOpenstackHandler))
 }
 
 func Quit() {
