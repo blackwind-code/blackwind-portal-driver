@@ -5,7 +5,7 @@ Blackwind service portal, backend driver
 ## Build
 ```bash
 sudo apt install python3-openstackclient
-git clone github.com/blackwind-code/blackwind-portal-driver.git
+git clone https://github.com/blackwind-code/blackwind-portal-driver.git
 cd blackwind-portal-driver/blackwind-portal-driver
 go build main.go
 ```
