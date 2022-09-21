@@ -70,7 +70,7 @@ func Init(m *http.ServeMux, secret string) {
 		Log.Fatal(err)
 	}
 
-	PROHIBITED = []string{"admin", "glance", "placement", "neutron", "nova", "cinder"}
+	PROHIBITED = []string{"admin", "service", "glance", "placement", "neutron", "nova", "cinder"}
 
 	m.HandleFunc("/api/openstack/user", checkSecretMiddleware(apiOpenstackHandler))
 }
