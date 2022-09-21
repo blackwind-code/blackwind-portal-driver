@@ -10,7 +10,7 @@ cd blackwind-portal-driver/blackwind-portal-driver
 go build main.go
 ```
 
-## Add database user & grant privilege to user on Openstack database
+## Add database user & grant privilege to user on Openstack database (Once)
 - Requires fully operational openstack cluster
 - Requires fully operational zerotier controller node
 ```bash
@@ -21,8 +21,8 @@ CREATE USER '<OS_DB_USERNAME>'@'%' IDENTIFIED BY '<OS_DB_PASSWORD>';
 
 GRANT SELECT ON keystone.local_user TO '<OS_DB_USERNAME>'@'localhost';
 GRANT SELECT ON keystone.local_user TO '<OS_DB_USERNAME>'@'%';
-GRANT UPDATE ON keystone.local_user TO '<OS_DB_USERNAME>'@'localhost';
-GRANT UPDATE ON keystone.local_user TO '<OS_DB_USERNAME>'@'%';
+GRANT SELECT ON keystone.password TO '<OS_DB_USERNAME>'@'localhost';
+GRANT SELECT ON keystone.password TO '<OS_DB_USERNAME>'@'%';
 GRANT UPDATE ON keystone.password TO '<OS_DB_USERNAME>'@'localhost';
 GRANT UPDATE ON keystone.password TO '<OS_DB_USERNAME>'@'%';
 
