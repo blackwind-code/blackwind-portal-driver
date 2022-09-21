@@ -33,14 +33,16 @@ func UserCreate(email string, passwordHash string) HttpRes {
 	argRandomPass := shellescape.Quote(randomString())
 
 	// openstack project create --domain default --description <email> <email>
-	output, err := exec.Command("openstack project create --domain default --description user " + argEmail).Output()
+	// output, err := exec.Command("openstack project create --domain default --description user " + argEmail).Output()
+	output, err := exec.Command("openstack", "project", "create", "--domain", "default", "--description", "user", argEmail).Output()
 	if err != nil {
 		Log.Printf("Error: %v\n", err)
 		return HttpRes{status: "500 Internal Server Error", body: string(output)}
 	}
 
 	// openstack user create --project <email> --password <randompass> <email>
-	output, err = exec.Command("openstack user create --project " + argEmail + " --password " + argRandomPass + " " + argEmail).Output()
+	// output, err = exec.Command("openstack user create --project " + argEmail + " --password " + argRandomPass + " " + argEmail).Output()
+	output, err = exec.Command("openstack", "user", "create", "--project", argEmail, "--password", argRandomPass, argEmail).Output()
 	if err != nil {
 		Log.Printf("Error: %v\n", err)
 		return HttpRes{status: "500 Internal Server Error", body: string(output)}
@@ -68,14 +70,16 @@ func UserUpdate(oldEmail string, newEmail string, passwordHash string) HttpRes {
 	argNewEmail := shellescape.Quote(newEmail)
 
 	// change project name
-	output, err := exec.Command("openstack project set " + argOldEmail + " --name " + argNewEmail).Output()
+	//output, err := exec.Command("openstack project set " + argOldEmail + " --name " + argNewEmail).Output()
+	output, err := exec.Command("openstack", "project", "set", argOldEmail, "--name", argNewEmail).Output()
 	if err != nil {
 		Log.Printf("Error: %v\n", err)
 		return HttpRes{status: "500 Internal Server Error", body: string(output)}
 	}
 
 	// change user email
-	output, err = exec.Command("openstack user set " + argOldEmail + " --name " + argNewEmail).Output()
+	// output, err = exec.Command("openstack user set " + argOldEmail + " --name " + argNewEmail).Output()
+	output, err = exec.Command("openstack", "user", "set", argOldEmail, "--name", argNewEmail).Output()
 	if err != nil {
 		Log.Printf("Error: %v\n", err)
 		return HttpRes{status: "500 Internal Server Error", body: string(output)}
@@ -102,14 +106,16 @@ func UserDelete(email string) HttpRes {
 	argEmail := shellescape.Quote(email)
 
 	// delete user
-	output, err := exec.Command("openstack user delete " + argEmail).Output()
+	// output, err := exec.Command("openstack user delete " + argEmail).Output()
+	output, err := exec.Command("openstack", "user", "delete", argEmail).Output()
 	if err != nil {
 		Log.Printf("Error: %v\n", err)
 		return HttpRes{status: "500 Internal Server Error", body: string(output)}
 	}
 
 	// delete project
-	output, err = exec.Command("openstack project delete " + argEmail).Output()
+	// output, err = exec.Command("openstack project delete " + argEmail).Output()
+	output, err = exec.Command("openstack", "project", "delete", argEmail).Output()
 	if err != nil {
 		Log.Printf("Error: %v\n", err)
 		return HttpRes{status: "500 Internal Server Error", body: string(output)}
