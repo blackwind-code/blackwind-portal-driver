@@ -28,5 +28,5 @@ func main() {
 	openstack.Init(mux, SECRET)
 	zerotier.Init(mux, SECRET)
 
-	http.ListenAndServe(":8000", mux)
+	http.ListenAndServe(":8888", mux)
 }
