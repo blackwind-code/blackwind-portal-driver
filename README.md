@@ -52,6 +52,6 @@ export ZEROTIER_NODE_ID=<zerotier-controller-node-id>
 export ZEROTIER_NETWORK_ID=<zerotier-network-id>
 
 # Run
-cd blackwind-portal-driver/blackwind-portal-driver
+cd blackwind-portal-driver/cmd/blackwind-portal-driver
 ./main
 ```
