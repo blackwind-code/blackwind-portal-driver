@@ -39,7 +39,7 @@ export OS_PROJECT_NAME=<openstack-project-name>
 export OS_USER_DOMAIN_NAME=<openstack-user-domain-name>
 export OS_PROJECT_DOMAIN_NAME=<openstack-project-domain-name>
 export OS_AUTH_URL=http://localhost:5000/v3
-export OS_IDENTITY_APY_VERSION=3
+export OS_IDENTITY_API_VERSION=3
 
 export OS_DB_USERNAME=<OS_DB_USERNAME>
 export OS_DB_PASSWORD=<OS_DB_PASSWORD>
