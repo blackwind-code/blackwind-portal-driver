@@ -31,13 +31,13 @@ func DeviceCreate(ztAddr string) HttpRes {
 	reqJson.Authorized = true
 	reqPayload, err := json.Marshal(reqJson)
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 
 	req, err := http.NewRequest("POST", URL, bytes.NewBuffer(reqPayload))
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 	req.Header.Set("X-ZT1-AUTH", ZEROTIER_TOKEN)
@@ -46,7 +46,7 @@ func DeviceCreate(ztAddr string) HttpRes {
 	client := &http.Client{}
 	res, err := client.Do(req)
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 	defer res.Body.Close()
@@ -69,13 +69,13 @@ func DeviceUpdate(ztAddr string, ztType int) HttpRes {
 	reqJson.Tags = [][]int{{100, ztType}}
 	reqPayload, err := json.Marshal(reqJson)
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 
 	req, err := http.NewRequest("POST", URL, bytes.NewBuffer(reqPayload))
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 	req.Header.Set("X-ZT1-AUTH", ZEROTIER_TOKEN)
@@ -84,7 +84,7 @@ func DeviceUpdate(ztAddr string, ztType int) HttpRes {
 	client := &http.Client{}
 	res, err := client.Do(req)
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 	defer res.Body.Close()
@@ -108,13 +108,13 @@ func DeviceDelete(ztAddr string) HttpRes {
 	reqJson.Authorized = false
 	reqPayload, err := json.Marshal(reqJson)
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 
 	req, err := http.NewRequest("POST", URL, bytes.NewBuffer(reqPayload))
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 	req.Header.Set("X-ZT1-AUTH", ZEROTIER_TOKEN)
@@ -123,14 +123,14 @@ func DeviceDelete(ztAddr string) HttpRes {
 	client := &http.Client{}
 	res, err := client.Do(req)
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 	res.Body.Close()
 
 	req, err = http.NewRequest("DELETE", URL, nil)
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 	req.Header.Set("X-ZT1-AUTH", ZEROTIER_TOKEN)
@@ -139,7 +139,7 @@ func DeviceDelete(ztAddr string) HttpRes {
 	client = &http.Client{}
 	res, err = client.Do(req)
 	if err != nil {
-		Log.Printf("Error: %v\n", err)
+		Log.Printf("Error: %v\n", err.Error())
 		return HttpRes{status: "500 Internal Server Error", body: err.Error()}
 	}
 	defer res.Body.Close()
