@@ -26,6 +26,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/ping", ping)
 	openstack.Init(mux, SECRET)
+	defer openstack.Quit()
 	zerotier.Init(mux, SECRET)
 
 	http.ListenAndServe(":8888", mux)
